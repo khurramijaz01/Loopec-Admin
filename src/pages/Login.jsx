@@ -1,0 +1,131 @@
+import React, { useEffect, useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { loginValidationSchema } from "../schema/authSchema";
+import "./Login.css";
+import { EmployeeData, LoginCall } from "../Apis/Auth";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
+
+const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [deviceToken, setDeviceToken] = useState(null);
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  useEffect(() => {
+    const token = localStorage.getItem("fcm_token") || "dummy-device-token";
+    setDeviceToken(token);
+  }, []);
+
+  const handleLogin = async (values) => {
+    const data = {
+      userName: values.userName,
+      password: values.password,
+      DeviceToken: deviceToken,
+    };
+
+    try {
+      setIsLoading(true);
+      const response = await LoginCall(data);
+      console.log(response, "Login Call");
+
+      if (response?.data?.errorCode === 200) {
+        const user = response?.data?.data;
+        const token = user?.accessToken;
+
+        login(user, token);
+
+        if (user?.employeeId) {
+          getEmployeeData(user?.employeeId);
+        }
+        toast.success("Login Successful!");
+        navigate("/home");
+      } else {
+        toast.error(
+          "Login Failed: " + (response?.data?.message || "Unknown error")
+        );
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login Error: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getEmployeeData = async (employeeId) => {
+    try {
+      const response = await EmployeeData(employeeId);
+      console.log(response, "Employee Data");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h1>Loopec Admin</h1>
+          <p>Welcome back! Please sign in to your account.</p>
+        </div>
+
+        <Formik
+          initialValues={{ userName: "", password: "" }}
+          validationSchema={loginValidationSchema}
+          onSubmit={handleLogin}
+        >
+          {({ isSubmitting }) => (
+            <Form className="login-form">
+              <div className="form-group">
+                <label htmlFor="userName">Username</label>
+                <Field
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  placeholder="Enter your username"
+                />
+                <ErrorMessage
+                  name="userName"
+                  component="div"
+                  className="error-message"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <Field
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="error-message"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="login-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <ClipLoader size={18} color="#fff" />
+                ) : (
+                  "Log In"
+                )}
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
