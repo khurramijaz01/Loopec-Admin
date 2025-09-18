@@ -6,9 +6,9 @@ import "./Leaves.css";
 import {
   employeeLeavesGetEmpLeavesCall,
   updateLeaveStatus,
-} from "../Apis/AttendanceLeaves";
-import { useAuth } from "../contexts/AuthContext";
-import LeaveSkeleton from "../components/SkeletonLoading/Skeleton";
+} from "../../Apis/AttendanceLeaves";
+import { useAuth } from "../../contexts/AuthContext";
+import LeaveSkeleton from "../../components/SkeletonLoading/Skeleton";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 

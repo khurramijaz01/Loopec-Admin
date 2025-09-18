@@ -129,21 +129,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    // hmr: {
-    //   overlay: false,
-    // },
-    proxy: {
-      "/api": {
-        target: "https://hcy087s8e6n.sn.mynetname.net:5002",
-        changeOrigin: true,
-        secure: false,
-      },
-      "/sinaco": {
-        target: "https://hcy087s8e6n.sn.mynetname.net:5001",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "https://hcy087s8e6n.sn.mynetname.net:5002",
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //     "/sinaco": {
+  //       target: "https://hcy087s8e6n.sn.mynetname.net:5001",
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
 });

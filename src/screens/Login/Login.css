@@ -84,6 +84,33 @@
   box-shadow: 0 0 0 3px rgba(13, 100, 93, 0.1);
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  flex: 1;
+  padding-right: 44px;
+}
+
+.password-visibility-icon {
+  position: absolute;
+  right: 12px;
+  color: #777;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.password-visibility-icon:hover {
+  color: #333;
+}
+
 .login-button {
   background: linear-gradient(135deg, #0D645D 0%, #4AB493 100%);
   color: white;

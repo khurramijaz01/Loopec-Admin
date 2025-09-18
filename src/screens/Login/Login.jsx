@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { loginValidationSchema } from "../schema/authSchema";
+import { loginValidationSchema } from "../../schema/authSchema";
 import "./Login.css";
-import { EmployeeData, LoginCall } from "../Apis/Auth";
+import { EmployeeData, LoginCall } from "../../Apis/Auth";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [deviceToken, setDeviceToken] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -96,12 +98,31 @@ const Login = () => {
 
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <Field
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                />
+                <div className="password-input-wrapper">
+                  <Field
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                  />
+                  <span
+                    className="password-visibility-icon"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setShowPassword((prev) => !prev);
+                      }
+                    }}
+                  >
+                    {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+                  </span>
+                </div>
                 <ErrorMessage
                   name="password"
                   component="div"
@@ -114,7 +135,7 @@ const Login = () => {
                 className="login-button"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? (
+                {isLoading ? (
                   <ClipLoader size={18} color="#fff" />
                 ) : (
                   "Log In"

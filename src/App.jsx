@@ -8,11 +8,11 @@ import {
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout/Layout";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Leaves from "./pages/Leaves";
-import Purchase from "./pages/Purchase";
-import Profile from "./pages/Profile";
+import Login from "./screens/Login/Login";
+import Home from "./screens/Home/Home";
+import Leaves from "./screens/Leaves/Leaves";
+import Purchase from "./screens/Purchase/Purchase";
+import Profile from "./screens/Profile/Profile";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 
