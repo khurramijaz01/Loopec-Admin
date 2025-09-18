@@ -20,6 +20,12 @@ const updateSW = registerSW({
       duration: 3000,
     });
   },
+  onRegistered() {
+    console.log('SW Registered');
+  },
+  onRegisterError(error) {
+    console.log('SW registration error', error);
+  },
 });
 
 createRoot(document.getElementById('root')).render(
