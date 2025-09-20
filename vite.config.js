@@ -11,7 +11,7 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'Loopec Admin',
-        short_name: 'Loopec',
+        short_name: 'Loopec Admin',
         description: 'Employee Management App',
         theme_color: '#ffffff',
         background_color: '#ffffff',
