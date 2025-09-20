@@ -80,7 +80,7 @@ const Home = () => {
             <div className="card-content">
               <h2>ATTENDANCE LEAVE</h2>
               <div className="sub-text">
-                {leaveRequests.filter((req) => req.leaveStatus === 0).length}{" "}
+                {leaveRequests.filter((req) => req.leaveStatus === 4).length}{" "}
                 pending approval
               </div>
             </div>
