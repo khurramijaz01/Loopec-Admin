@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [userToken, setUserToken] = useState(null);
+  const [empData, setEmpData] = useState(null);
 
   const login = (user, token) => {
     setIsAuthenticated(true);
@@ -29,6 +30,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUserToken(null);
     setUserData(null);
+    setEmpData(null);
     localStorage.clear();
   };
 
@@ -36,6 +38,8 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("access_token");
     const storedUser = localStorage.getItem("user_data");
     const storedAuth = localStorage.getItem("isAuthenticated");
+    const storedEmpData = localStorage.getItem("emp_data");
+    
     if (token) {
       setUserToken(token);
     }
@@ -45,6 +49,9 @@ export const AuthProvider = ({ children }) => {
     if (storedAuth === "true") {
       setIsAuthenticated(true);
     }
+    if (storedEmpData) {
+      setEmpData(JSON.parse(storedEmpData));
+    }
     setIsLoading(false);
   };
 
@@ -52,13 +59,20 @@ export const AuthProvider = ({ children }) => {
     loadToken();
   }, []);
 
+  const setEmployeeData = (data) => {
+    setEmpData(data);
+    localStorage.setItem("emp_data", JSON.stringify(data));
+  };
+
   const value = {
     isAuthenticated,
     isLoading,
     userToken,
     userData,
+    empData,
     login,
     logout,
+    setEmployeeData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

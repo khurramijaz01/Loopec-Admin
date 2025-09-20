@@ -6,7 +6,7 @@
 .leaves-header {
   text-align: center;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #0D645D 0%, #4AB493 100%);
+  background: linear-gradient(135deg, #5B87B0 0%, #3039A2 100%);
   border-radius: 0 0 16px 16px;
   color: white;
   margin: 0 -20px 30px -20px;
@@ -29,7 +29,7 @@
   display: flex;
   gap: 4px;
   margin-bottom: 30px;
-  background: #f8f9fa;
+  background: #f9f9fc;
   padding: 4px;
   border-radius: 12px;
   width: 100%;
@@ -53,24 +53,16 @@
 }
 
 .leaves-tabs .tab-button.active {
-  background: linear-gradient(135deg, #0D645D 0%, #4AB493 100%);
+  background: linear-gradient(135deg, #5B87B0 0%, #3039A2 100%);
   color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* .tab-button {
+.tab-button {
   display: flex;
   align-items: center;
   gap: 8px;
-} */
-
-.leaves-content {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -119,6 +111,7 @@
   transition: all 0.3s ease;
 }
 
+
 .request-card:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
@@ -130,6 +123,7 @@
   align-items: center;
   margin-bottom: 16px;
 }
+
 
 .employee-info {
   display: flex;
@@ -151,7 +145,7 @@
 
 .employee-info h3 {
   color: #333;
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
@@ -177,6 +171,7 @@
   gap: 8px;
   margin-bottom: 16px;
 }
+
 
 .detail-item {
   display: flex;
@@ -213,9 +208,9 @@
 }
 
 .action-btn.approve {
-  background: linear-gradient(135deg, #0D645D, #4AB493);
+  background: #10b981;
   color: #fff;
-  border: none;        /* just in case */
+  border: none;    
   display: inline-block;
 }
 
@@ -316,6 +311,7 @@
     gap: 8px;
     padding: 8px;
     overflow-x: unset; 
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
   }
 
   .tab-button {

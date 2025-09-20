@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
-import { CheckCircle, XCircle, Clock, Package, Users, BarChart3 } from 'lucide-react';
+import React from 'react';
+// import { useState } from 'react';
+import { Package } from 'lucide-react';
+// import { CheckCircle, XCircle, Clock, Package, Users, BarChart3 } from 'lucide-react';
 import './Purchase.css';
 
 const Purchase = () => {
+  return (
+    <div className="purchase-container">
+      <div className="coming-soon">
+        <div className="coming-soon-icon">
+          <Package size={64} />
+        </div>
+        <h1>Coming Soon</h1>
+        <p>Purchase Management feature is under development</p>
+      </div>
+    </div>
+  );
+
+  /* ORIGINAL CODE - COMMENTED OUT
   const [activeTab, setActiveTab] = useState('approved');
 
   const orders = [
@@ -232,6 +247,7 @@ const Purchase = () => {
       </div>
     </div>
   );
+  */
 };
 
 export default Purchase;

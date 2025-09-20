@@ -4,7 +4,7 @@ const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
 const VITE_BASE_URL_SINACO = import.meta.env.VITE_BASE_URL_SINACO;
 
 export const employeeLeavesGetEmpLeavesCall = async (ReportTo) => {
-  const route = `${VITE_BASE_URL}/sinaco/api/employee_leaves/get-emp-leaves`;
+  const route = `${VITE_BASE_URL}/sinaco/api/employee_leaves/get-team-leaves?ReportTo=${ReportTo}`;
   console.log(route, "route");
 
   return await axios.get(route, {
@@ -12,9 +12,9 @@ export const employeeLeavesGetEmpLeavesCall = async (ReportTo) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    params: {
-      ReportTo,
-    },
+    // params: {
+    //   ReportTo,
+    // },
   });
 };
 

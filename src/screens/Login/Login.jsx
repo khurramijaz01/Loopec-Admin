@@ -8,13 +8,14 @@ import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { Eye, EyeOff } from "lucide-react";
+import Logo from "../../assets/Logo.svg";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [deviceToken, setDeviceToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, setEmployeeData } = useAuth();
 
   useEffect(() => {
     const token = localStorage.getItem("fcm_token") || "dummy-device-token";
@@ -37,13 +38,13 @@ const Login = () => {
         const user = response?.data?.data;
         const token = user?.accessToken;
 
-        login(user, token);
+        console.log(user, "USerrr");
+        await login(user, token);
 
-        if (user?.employeeId) {
-          getEmployeeData(user?.employeeId);
+        if (user?.EmployeeId) {
+          getEmployeeData(user?.EmployeeId);
         }
         toast.success("Login Successful!");
-        navigate("/home");
       } else {
         toast.error(
           "Login Failed: " + (response?.data?.message || "Unknown error")
@@ -58,8 +59,13 @@ const Login = () => {
   };
 
   const getEmployeeData = async (employeeId) => {
+    console.log(employeeId, "test");
     try {
       const response = await EmployeeData(employeeId);
+      if (response?.data?.status === 200) {
+        setEmployeeData(response?.data?.result);
+      }
+      
       console.log(response, "Employee Data");
     } catch (error) {
       console.log(error);
@@ -70,7 +76,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>Loopec Admin</h1>
+          <img src={Logo} alt="Logo" />
           <p>Welcome back! Please sign in to your account.</p>
         </div>
 
@@ -135,11 +141,7 @@ const Login = () => {
                 className="login-button"
                 disabled={isSubmitting}
               >
-                {isLoading ? (
-                  <ClipLoader size={18} color="#fff" />
-                ) : (
-                  "Log In"
-                )}
+                {isLoading ? <ClipLoader size={18} color="#fff" /> : "Log In"}
               </button>
             </Form>
           )}

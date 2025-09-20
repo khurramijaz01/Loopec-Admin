@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0D645D 0%, #4AB493 100%);
+  background: linear-gradient(135deg, #5B87B0 0%, #3039A2 100%);
   padding: 20px;
 }
 
@@ -38,7 +38,7 @@
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 10px 0;
-  background: linear-gradient(135deg, #0D645D 0%, #4AB493 100%);
+  background: linear-gradient(135deg, #5B87B0 0%, #3039A2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -79,7 +79,7 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #0D645D;
+  border-color: #3039A2;
   background: white;
   box-shadow: 0 0 0 3px rgba(13, 100, 93, 0.1);
 }
@@ -112,7 +112,7 @@
 }
 
 .login-button {
-  background: linear-gradient(135deg, #0D645D 0%, #4AB493 100%);
+  background: linear-gradient(135deg, #5B87B0 0%, #3039A2 100%);
   color: white;
   border: none;
   padding: 14px 20px;

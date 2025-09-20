@@ -16,7 +16,7 @@ export const LoginCall = async (body) => {
 };
 
 export const EmployeeData = async (employeeId) => {
-  const route = `${VITE_BASE_URL}/api/civ_employee/get-all`;
+  const route = `${VITE_BASE_URL}/sinaco/api/civ_employee/get-all?id=${employeeId}`;
   console.log(route, "route");
 
   return await axios.get(route, {
@@ -24,6 +24,5 @@ export const EmployeeData = async (employeeId) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    params: { employeeId },
   });
 };
