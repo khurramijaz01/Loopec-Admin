@@ -1,84 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
 } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Layout from "./components/Layout/Layout";
-import Login from "./screens/Login/Login";
-import Home from "./screens/Home/Home";
-import Leaves from "./screens/Leaves/Leaves";
-import Purchase from "./screens/Purchase/Purchase";
-import Profile from "./screens/Profile/Profile";
+import { AuthProvider } from "./contexts/AuthContext";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
-
-const AppRoutes = () => {
-  const { isAuthenticated } = useAuth();
-
-  console.log(isAuthenticated, "Auetah")
-
-  return (
-    <Routes>
-      <Route
-        path="/"
-        element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />}
-      />
-      <Route
-        path="/home"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Home />} />
-      </Route>
-      <Route
-        path="/leaves"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Leaves />} />
-      </Route>
-      <Route
-        path="/purchase"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Purchase />} />
-      </Route>
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Profile />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  );
-};
+import AppRoutes from "./routes/AppRoutes";
+import { requestForToken, onMessageListener } from "./firebase/firebase";
 
 function App() {
+
+  const [notification, setNotification] = useState(null);
+  const [tokenFound, setTokenFound] = useState(false);
+
+  useEffect(() => {
+    requestForToken(setTokenFound);
+
+    const unsubscribe = onMessageListener((payload) => {
+      setNotification({
+        title: payload?.notification?.title,
+        body: payload?.notification?.body,
+      });
+    });
+
+    return () => {
+      if (typeof unsubscribe === "function") {
+        unsubscribe();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!notification) return;
+    const timer = setTimeout(() => setNotification(null), 5000);
+    return () => clearTimeout(timer);
+  }, [notification]);
+
+
   return (
     <AuthProvider>
       <Router>
         <div className="App">
           <AppRoutes />
           <Toaster position="top-center" />
+          
+      {notification && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            background: "#333",
+            color: "#fff",
+            padding: "10px 15px",
+            borderRadius: "8px",
+          }}
+        >
+          <h4>{notification.title}</h4>
+          <p>{notification.body}</p>
+        </div>
+      )}
         </div>
       </Router>
     </AuthProvider>
