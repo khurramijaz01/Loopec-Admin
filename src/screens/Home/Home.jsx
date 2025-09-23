@@ -45,7 +45,7 @@ const Home = () => {
               <div className="user-avatar">
                 {empData?.EmpPic ? (
                   <img
-                    src={empData.EmpPic}
+                    src={empData?.EmpPic}
                     alt="Employee Picture"
                     style={{
                       width: "40px",

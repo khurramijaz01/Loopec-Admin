@@ -65,7 +65,6 @@ const Login = () => {
       if (response?.data?.status === 200) {
         setEmployeeData(response?.data?.result);
       }
-      
       console.log(response, "Employee Data");
     } catch (error) {
       console.log(error);
