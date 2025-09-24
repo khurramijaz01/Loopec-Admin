@@ -2,12 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBcLmBJzJDbuiIAqLyPiXLXqAxfAhxHLaQ",
-  authDomain: "testapp-8c95f.firebaseapp.com",
-  projectId: "testapp-8c95f",
-  storageBucket: "testapp-8c95f.firebasestorage.app",
-  messagingSenderId: "171780616501",
-  appId: "1:171780616501:web:21cb898134a69722321c7c",
+    apiKey: "AIzaSyDrrMPbZuF0Wf7iZg_8wEsOT3VA0CveHh4",
+    authDomain: "sinaco-hr-app.firebaseapp.com",
+    projectId: "sinaco-hr-app",
+    storageBucket: "sinaco-hr-app.firebasestorage.app",
+    messagingSenderId: "827588228357",
+    appId: "1:827588228357:web:03a6acad057ae363c9336c",
+    measurementId: "G-EBPDK3LR48"
 };
 
 export const app = initializeApp(firebaseConfig);
@@ -28,12 +29,13 @@ export const requestForToken = async (setTokenFound) => {
     }
 
     const currentToken = await getToken(messaging, {
-      vapidKey: "BK0_z8RC5qn6T8YBD4A1FXHEZoDHBSVgENKvkjBoJDP5aVsGsGSV2BB8_NQfKSYCJg64IcyPmeyHcW-_B5o7ano",
+      vapidKey: "BGIxS-lSJCmfZwkTmWFCQZQ2mgQitxF_XpFFr3jECxpmpj0abiWmTBrRgVFXwK_3p62ixAI66p_zMMH3uSx0nsM",
     });
 
     if (currentToken) {
       console.log("Current token:", currentToken);
       setTokenFound(true);
+      localStorage.setItem("fcm_token", currentToken);
       return currentToken;
     } else {
       console.log("No registration token available.");

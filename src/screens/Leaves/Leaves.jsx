@@ -101,6 +101,7 @@ const Leaves = () => {
         setIsReject(true);
       }
       const response = await updateLeaveStatus(object);
+      console.log(response, 'Accept Reject')
       if (response?.data?.error_code === 0) {
         getMyTeamLeaves();
         if (status_id === 6) {

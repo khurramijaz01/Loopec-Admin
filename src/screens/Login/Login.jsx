@@ -12,24 +12,23 @@ import Logo from "../../assets/Logo.svg";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [deviceToken, setDeviceToken] = useState(null);
+  // const [deviceToken, setDeviceToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
   const { login, setEmployeeData } = useAuth();
 
-  useEffect(() => {
-    const token = localStorage.getItem("fcm_token") || "dummy-device-token";
-    setDeviceToken(token);
-  }, []);
+  // useEffect(() => {
 
+  //   setDeviceToken(token);
+  // }, []);
+  const fcm_token = localStorage.getItem("fcm_token");
+  console.log(fcm_token, 'fcmTOeken')
   const handleLogin = async (values) => {
-
     const data = {
       userName: values.userName,
       password: values.password,
-      DeviceToken: deviceToken,
+      DeviceToken: fcm_token,
     };
-
+    console.log(data, "Data");
     try {
       setIsLoading(true);
       const response = await LoginCall(data);

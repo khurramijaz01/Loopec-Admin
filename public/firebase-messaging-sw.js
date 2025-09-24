@@ -6,12 +6,13 @@ importScripts(
 );
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBcLmBJzJDbuiIAqLyPiXLXqAxfAhxHLaQ",
-  authDomain: "testapp-8c95f.firebaseapp.com",
-  projectId: "testapp-8c95f",
-  storageBucket: "testapp-8c95f.firebasestorage.app",
-  messagingSenderId: "171780616501",
-  appId: "1:171780616501:web:21cb898134a69722321c7c",
+  apiKey: "AIzaSyDrrMPbZuF0Wf7iZg_8wEsOT3VA0CveHh4",
+  authDomain: "sinaco-hr-app.firebaseapp.com",
+  projectId: "sinaco-hr-app",
+  storageBucket: "sinaco-hr-app.firebasestorage.app",
+  messagingSenderId: "827588228357",
+  appId: "1:827588228357:web:03a6acad057ae363c9336c",
+  measurementId: "G-EBPDK3LR48"
 });
 
 const messaging = firebase.messaging();
